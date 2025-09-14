@@ -11,7 +11,7 @@
       padding: 0;
       font-family: 'Arial', sans-serif;
       background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
-      display: flex;
+      display: none; /* Pehle hidden rahega */
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -20,7 +20,6 @@
       text-align: center;
       position: relative;
     }
-
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3em;
@@ -28,13 +27,11 @@
       margin: 0.2em 0;
       text-shadow: 2px 2px 5px #d46a6a;
     }
-
     p {
       font-size: 1.5em;
       color: #fff;
       margin: 0.5em 0;
     }
-
     button {
       padding: 10px 20px;
       font-size: 1.2em;
@@ -46,11 +43,9 @@
       cursor: pointer;
       transition: 0.3s;
     }
-
     button:hover {
       background-color: #ff4f70;
     }
-
     .heart {
       position: absolute;
       width: 40px;
@@ -59,7 +54,6 @@
       transform: rotate(-45deg);
       animation: float 4s infinite;
     }
-
     .heart:before,
     .heart:after {
       content: '';
@@ -69,16 +63,13 @@
       background: red;
       border-radius: 50%;
     }
-
     .heart:before { top: -20px; left: 0; }
     .heart:after { left: 20px; top: 0; }
-
     @keyframes float {
       0% { transform: translateY(0) rotate(-45deg); opacity: 1;}
       50% { transform: translateY(-20px) rotate(-45deg); opacity: 0.7;}
       100% { transform: translateY(0) rotate(-45deg); opacity: 1;}
     }
-
     .confetti {
       position: absolute;
       width: 10px;
@@ -87,19 +78,16 @@
       top: -10px;
       animation: fall linear infinite;
     }
-
     @keyframes fall {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
-
     img {
       max-width: 300px;
       border-radius: 20px;
       margin-top: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-
   </style>
 </head>
 <body>
@@ -108,8 +96,8 @@
   <p>Every moment with you is a treasure.</p>
   <p>Looking forward to many more years together.</p>
 
-  <!-- Replace this with your Imgur direct link -->
- <img src="https://i.postimg.cc/Wb0n9wx6/our-picture.jpg" alt="Our Photo">
+  <!-- Replace this with your Imgur/Postimages direct link -->
+  <img src="https://i.postimg.cc/Wb0n9wx6/our-picture.jpg" alt="Our Photo">
 
   <button onclick="playMusic()">Play Romantic Music</button>
 
@@ -121,10 +109,23 @@
   <audio id="romanticAudio" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
 
   <script>
+    // PASSWORD PROTECTION
+    const correctPassword = "Password@123"; // yahan apna password dalen
+    const userPassword = prompt("Please enter the password to view this page:");
+
+    if (userPassword === correctPassword) {
+      document.body.style.display = "flex";
+    } else {
+      alert("Wrong password! You cannot view this page.");
+      document.body.innerHTML = "<h2 style='color:red;text-align:center;margin-top:20%;'>Access Denied ❌</h2>";
+    }
+
+    // Romantic music
     function playMusic() {
       document.getElementById('romanticAudio').play();
     }
 
+    // Confetti
     function createConfetti() {
       const confetti = document.createElement('div');
       confetti.classList.add('confetti');
@@ -135,7 +136,6 @@
       document.body.appendChild(confetti);
       setTimeout(() => confetti.remove(), 6000);
     }
-
     setInterval(createConfetti, 300);
   </script>
 
